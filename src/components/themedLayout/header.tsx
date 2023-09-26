@@ -17,10 +17,11 @@ type IUser = {
   avatar: string;
 };
 
-export const Header: React.FC<RefineThemedLayoutV2HeaderProps> = ({
+
+export const ThemedHeaderV2: React.FC<RefineThemedLayoutV2HeaderProps> = ({
   isSticky = true,
 }) => {
-  const { mode, setMode } = useContext(ColorModeContext);
+
 
   const { data: user } = useGetIdentity<IUser>();
 
@@ -40,14 +41,7 @@ export const Header: React.FC<RefineThemedLayoutV2HeaderProps> = ({
             justifyContent="flex-end"
             alignItems="center"
           >
-            <IconButton
-              color="inherit"
-              onClick={() => {
-                setMode();
-              }}
-            >
-              {mode === "dark" ? <LightModeOutlined /> : <DarkModeOutlined />}
-            </IconButton>
+        
 
             {(user?.avatar || user?.name) && (
               <Stack
