@@ -19,18 +19,7 @@ import routerBindings, {
 import dataProvider from "@refinedev/simple-rest";
 import axios, { AxiosRequestConfig } from "axios";
 import { CredentialResponse } from "interfaces/google";
-import {
-  BlogPostCreate,
-  BlogPostEdit,
-  BlogPostList,
-  BlogPostShow,
-} from "pages/blog-posts";
-import {
-  CategoryCreate,
-  CategoryEdit,
-  CategoryList,
-  CategoryShow,
-} from "pages/categories";
+
 import { Login } from "pages/login";
 import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
 import { parseJwt } from "utils/parse-jwt";
@@ -42,6 +31,10 @@ import { ThemedSiderV2 } from "components/themedLayout/sider";
 import { ThemedTitleV2 } from "components/themedLayout/title";
 
 import { MenuBookOutlined } from "@mui/icons-material";
+import { MuiInferencer } from "@refinedev/inferencer/mui";
+
+import AllPosts from "pages/all-posts";
+import { CreatePosts } from "pages";
 
 const axiosInstance = axios.create();
 axiosInstance.interceptors.request.use((request: AxiosRequestConfig) => {
@@ -149,24 +142,14 @@ function App() {
               resources={[
                 {
                   name: "posts",
-                  list: "/blog-posts",
-                  create: "/blog-posts/create",
-                  edit: "/blog-posts/edit/:id",
-                  show: "/blog-posts/show/:id",
+                  list: AllPosts,
+                  create: CreatePosts,
                   icon: <MenuBookOutlined />,
-                  meta: {
-                    canDelete: true,
-                  },
+                 
                 },
                 {
                   name: "categories",
-                  list: "/categories",
-                  create: "/categories/create",
-                  edit: "/categories/edit/:id",
-                  show: "/categories/show/:id",
-                  meta: {
-                    canDelete: true,
-                  },
+                  list: MuiInferencer,
                 },
               ]}
               options={{
@@ -191,20 +174,20 @@ function App() {
                 >
                   <Route
                     index
-                    element={<NavigateToResource resource="blog_posts" />}
+                    path="/Posts"
+                    element={<AllPosts />}
+                    
+
                   />
-                  <Route path="/blog-posts">
-                    <Route index element={<BlogPostList />} />
-                    <Route path="create" element={<BlogPostCreate />} />
-                    <Route path="edit/:id" element={<BlogPostEdit />} />
-                    <Route path="show/:id" element={<BlogPostShow />} />
-                  </Route>
-                  <Route path="/categories">
-                    <Route index element={<CategoryList />} />
-                    <Route path="create" element={<CategoryCreate />} />
-                    <Route path="edit/:id" element={<CategoryEdit />} />
-                    <Route path="show/:id" element={<CategoryShow />} />
-                  </Route>
+                  <Route
+                    index
+                    path="/Posts/create"
+                    element={<CreatePosts />}
+                    
+
+                  />
+                  
+                 
                   <Route path="*" element={<ErrorComponent />} />
                 </Route>
                 <Route
