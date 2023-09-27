@@ -4,7 +4,7 @@ import MuiLink from "@mui/material/Link";
 import SvgIcon from "@mui/material/SvgIcon";
 import Typography from "@mui/material/Typography";
 import type { RefineLayoutThemedTitleProps } from "@refinedev/mui";
-import logo from '../../assets/logo.svg'
+import { logo } from "assets";
 
 
 

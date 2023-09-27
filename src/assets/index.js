@@ -1,4 +1,4 @@
-import logo from './logo.svg'
+import logo from './black-logo.svg'
 
 export {
 logo

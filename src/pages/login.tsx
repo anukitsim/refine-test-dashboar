@@ -1,7 +1,7 @@
 import { useLogin } from "@refinedev/core";
 import { useEffect, useRef } from "react";
 
-import logo from '../assets/logo.svg';
+import { logo } from "assets";
 
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
@@ -9,6 +9,7 @@ import Typography from "@mui/material/Typography";
 import { ThemedTitleV2 } from "@refinedev/mui";
 
 import { CredentialResponse } from "../interfaces/google";
+
 
 export const Login: React.FC = () => {
   const { mutate: login } = useLogin<CredentialResponse>();

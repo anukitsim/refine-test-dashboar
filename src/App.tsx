@@ -1,8 +1,4 @@
-import {
-  AuthBindings,
-  Authenticated,
-  Refine,
-} from "@refinedev/core";
+import { AuthBindings, Authenticated, Refine } from "@refinedev/core";
 import { RefineKbar, RefineKbarProvider } from "@refinedev/kbar";
 
 import {
@@ -44,16 +40,8 @@ import { ColorModeContextProvider } from "./contexts/color-mode";
 import { ThemedHeaderV2 } from "components/themedLayout/header";
 import { ThemedSiderV2 } from "components/themedLayout/sider";
 import { ThemedTitleV2 } from "components/themedLayout/title";
-import { MuiInferencer } from "@refinedev/inferencer/mui";
 
-import{
-  ArticleOutlined,
-  MenuBookOutlined,
-  Person2Outlined,
-
-
-
-} from '@mui/icons-material';
+import { MenuBookOutlined } from "@mui/icons-material";
 
 const axiosInstance = axios.create();
 axiosInstance.interceptors.request.use((request: AxiosRequestConfig) => {
@@ -160,25 +148,25 @@ function App() {
               authProvider={authProvider}
               resources={[
                 {
-                  name: "Posts",
-                  list: MuiInferencer,
-                  icon: <ArticleOutlined />
+                  name: "posts",
+                  list: "/blog-posts",
+                  create: "/blog-posts/create",
+                  edit: "/blog-posts/edit/:id",
+                  show: "/blog-posts/show/:id",
+                  icon: <MenuBookOutlined />,
+                  meta: {
+                    canDelete: true,
+                  },
                 },
-                {
-                  name: "Books",
-                  list: MuiInferencer,
-                  icon: <MenuBookOutlined />
-                },
-                {
-                  name: "Users",
-                  list: MuiInferencer,
-                  icon: <Person2Outlined />
-                },
-               
-
                 {
                   name: "categories",
-                  list: MuiInferencer,
+                  list: "/categories",
+                  create: "/categories/create",
+                  edit: "/categories/edit/:id",
+                  show: "/categories/show/:id",
+                  meta: {
+                    canDelete: true,
+                  },
                 },
               ]}
               options={{
@@ -191,7 +179,11 @@ function App() {
                 <Route
                   element={
                     <Authenticated fallback={<CatchAllNavigate to="/login" />}>
-                      <ThemedLayoutV2 Header={ThemedHeaderV2} Sider={ThemedSiderV2} Title={ThemedTitleV2}>
+                      <ThemedLayoutV2
+                        Header={ThemedHeaderV2}
+                        Sider={ThemedSiderV2}
+                        Title={ThemedTitleV2}
+                      >
                         <Outlet />
                       </ThemedLayoutV2>
                     </Authenticated>
